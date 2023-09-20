@@ -1,0 +1,12 @@
+﻿@page
+@model int[]
+@{
+    ViewData["Title"] = "پورتال تامین کنندگان";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+@section Navigation
+{
+    @await Component.InvokeAsync("Navigation", new { MenuItemId = 0, SelectedMenuItemId = 0 })
+}
+

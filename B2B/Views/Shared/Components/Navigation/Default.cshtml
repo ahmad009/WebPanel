@@ -1,0 +1,89 @@
+﻿@using DataModel;
+@model DataModel.ViewMenuDS
+@{
+    bool ContainsActiveMenu(ViewMenuItemDS item)
+    {
+        if (item.MenuItems.Count == 0 && item.IsSelected)
+            return true;
+        else
+        {
+            if (item.IsSelected)
+                return true;
+
+            bool contains = false;
+            foreach (var menu in item.MenuItems)
+            {
+                contains = ContainsActiveMenu(menu);
+                if (contains)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    void RenderSubMenuItems(ViewMenuItemDS item)
+    {
+        if (item.MenuItems.Count == 0)
+        {
+            @if (ContainsActiveMenu(item))
+            {
+                <li class="active" data-menu="">
+                    <a class="dropdown-item" href="@item.Url">@item.Title</a>
+                </li>
+            }
+            else
+            {
+                <li data-menu="">
+                    <a class="dropdown-item" href="@item.Url">@item.Title</a>
+                </li>
+            }
+        }
+        else
+        {
+            string classname = "dropdown dropdown-submenu";
+            bool isactive = ContainsActiveMenu(item);
+            if (isactive)
+                classname = "active " + classname;
+
+            <li class="@classname" data-menu="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="@item.Url" data-toggle="dropdown">@item.Title</a>
+                <ul class="dropdown-menu">
+                    @foreach (var menu in item.MenuItems)
+                    {
+                        RenderSubMenuItems(menu);
+                    }
+                </ul>
+            </li>
+        }
+    }
+}
+
+
+
+@{
+
+    foreach (var menu in Model.MenuItems)
+    {
+        <li class="dropdown nav-item" data-menu="dropdown">
+            @if(menu.MenuItems.Count == 0)
+            {
+                <a class="dropdown-item" href="@menu.Url">
+                    <i class="la la-clipboard"></i>
+                    <span>@menu.Title</span>
+                </a>
+                //<a class="dropdown-item" href="@menu.Url" data-toggle="dropdown">@menu.Title</a>
+            }
+            else
+            {
+                <a class="dropdown-toggle nav-link" href="@menu.Url" data-toggle="dropdown">
+                    <i class="la la-dashboard"></i>
+                    <span>@menu.Title</span>
+                </a>
+                <ul class="dropdown-menu">
+                    @foreach (var item in menu.MenuItems)
+                        RenderSubMenuItems(item);
+                </ul>
+            }
+        </li>
+    }
+}

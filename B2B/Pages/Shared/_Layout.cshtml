@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="rtl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title>@ViewBag.Title</title>
+    <link rel="apple-touch-icon" href="~/app-assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/app-assets/images/ico/favicon.ico">
+    <link href="~/app-assets/fonts/iransans/fonts.css" rel="stylesheet">
+    <link href="~/app-assets/fonts/line-awesome/css/line-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css-rtl/vendors.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css-rtl/app.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css-rtl/custom-rtl.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css-rtl/core/menu/menu-types/horizontal-menu.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css-rtl/core/colors/palette-gradient.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/charts/morris.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/fonts/simple-line-icons/style.css">
+    <link rel="stylesheet" type="text/css" href="~/app-assets/css-rtl/core/colors/palette-gradient.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/style-rtl.css">
+
+    @{
+        await RenderSectionAsync("Styles", required: false);
+    }
+</head>
+<html>
+
+<body class="horizontal-layout horizontal-menu 2-columns menu-expanded" data-open="hover" data-menu="horizontal-menu" data-col="2-columns">
+    <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow navbar-static-top navbar-dark navbar-brand-center">
+        <div class="navbar-wrapper">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav flex-row">
+                    <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="~/">
+                            <img class="img-fluid mb-1" alt="modern admin logo" style="max-height: 55px;" src="~/app-assets/images/logo/logo-transparent.png">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            @{
+                @await Component.InvokeAsync("UserInformation")
+            }
+        </div>
+    </nav>
+    <div class="header-navbar navbar-expand-sm navbar navbar-horizontal navbar-fixed navbar-light navbar-without-dd-arrow navbar-shadow"
+         role="navigation" data-menu="menu-wrapper">
+        <div class="navbar-container main-menu-content" data-menu="menu-container">
+            <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
+                @{
+                    await RenderSectionAsync("Navigation");
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="app-content content">
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-6 col-12 mb-2">
+                    @if (IsSectionDefined("Header"))
+                    {
+                        await RenderSectionAsync("Header");
+                    }
+                </div>
+            </div>
+            <div class="content-body">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <footer class="footer footer-static footer-light navbar-shadow">
+        <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2">
+            <span class="float-md-left d-block d-md-inline-block">
+                فروشگاه های زنجیره ای <a class="text-bold-800 grey darken-2" href="https://www.haftstores.com/"
+                                         target="_blank">هفت</a>
+            </span>
+            <span class="float-md-right d-block d-md-inline-blockd-none d-lg-block">.</span>
+        </p>
+    </footer>
+
+    @*<script type="text/javascript" src="~/app-assets/js/core/libraries/jquery.min.js"></script>*@
+    <script type="text/javascript" src="~/app-assets/vendors/js/vendors.min.js"></script>
+    <script type="text/javascript" src="~/app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <script type="text/javascript" src="~/app-assets/vendors/js/charts/jquery.sparkline.min.js"></script>
+    <script type="text/javascript" src="~/app-assets/vendors/js/charts/chart.min.js"></script>
+    <script type="text/javascript" src="~/app-assets/vendors/js/charts/raphael-min.js"></script>
+    <script type="text/javascript" src="~/app-assets/vendors/js/charts/morris.min.js"></script>
+    <script type="text/javascript" src="~/app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js"></script>
+    <script type="text/javascript" src="~/app-assets/vendors/js/charts/jvector/jquery-jvectormap-world-mill.js"></script>
+    <script type="text/javascript" src="~/app-assets/data/jvector/visitor-data.js"></script>
+    <script type="text/javascript" src="~/app-assets/js/core/app-menu.js"></script>
+    <script type="text/javascript" src="~/app-assets/js/core/app.js"></script>
+    <script type="text/javascript" src="~/app-assets/js/scripts/customizer.js"></script>
+    <script type="text/javascript" src="~/app-assets/js/scripts/ui/breadcrumbs-with-stats.js"></script>
+
+    @{
+        await RenderSectionAsync("Scripts", required: false);
+    }
+</body>
+</html>
