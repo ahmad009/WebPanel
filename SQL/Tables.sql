@@ -247,3 +247,33 @@ GO
 ALTER TABLE [web].[Web_WorkgroupOperation] CHECK CONSTRAINT [FK_Web_WorkgroupOperation_Web_WorkgroupDefinition]
 GO
 
+
+CREATE TABLE [web].[Web_User](
+	[Id] [uniqueidentifier] NOT NULL,
+	[AccountName] [nvarchar](150) NOT NULL,
+	[DomainName] [nvarchar](150) NULL,
+	[DisplayName] [nvarchar](150) NULL,
+	[IsActive] [bit] NOT NULL,
+	[CreateDate] [datetime] NULL,
+	[LastUpdateDate] [datetime] NULL,
+	[FirstName] [nvarchar](100) NULL,
+	[LastName] [nvarchar](100) NULL,
+	[Email] [nvarchar](150) NULL,
+	[Password] [nvarchar](150) NULL,
+ CONSTRAINT [PK_Web_User] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [IX_Web_User_Uniq] UNIQUE NONCLUSTERED 
+(
+	[AccountName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [web].[Web_User] ADD  CONSTRAINT [DF_Web_User_Id]  DEFAULT (newid()) FOR [Id]
+GO
+
+ALTER TABLE [web].[Web_User] ADD  CONSTRAINT [DF_Web_User_IsActive]  DEFAULT ((1)) FOR [IsActive]
+GO
+
